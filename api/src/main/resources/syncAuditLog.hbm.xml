@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.basicmodule.model">
+
+    <class name="SyncAuditLog" table="sync_audit_log">
+
+        <id name="logId" type="int" column="log_id">
+            <generator class="native"/>
+        </id>
+
+        <property name="type" type="int"
+                  column="type" length="11"/>
+
+        <property name="result" type="java.lang.String"
+                  column="result" length="36"/>
+
+        <property name="error" type="java.lang.String"
+                  column="error" length="36"/>
+
+        <property name="errorDetails" type="java.lang.String"
+                  column="error_details" length="36"/>
+
+        <property name="createdDate" type="java.util.Date"
+                  column="created_dt" length="19"/>
+    </class>
+</hibernate-mapping>

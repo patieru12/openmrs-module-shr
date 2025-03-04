@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.basicmodule.model">
+
+    <class name="ShrOffline" table="shr_offline">
+
+        <id name="recordId" type="int" column="record_id">
+            <generator class="native"/>
+        </id>
+        <property name="patientId" type="java.lang.String"
+                  column="patientId" length="36"/>
+        <property name="upid" type="java.lang.String"
+                  column="upid" length="36"/>
+        <property name="nid" type="java.lang.String"
+                  column="nid" length="36"/>
+        <property name="type" type="java.lang.String"
+                  column="type" length="36"/>
+        <property name="encounterId" type="java.lang.String"
+                  column="encounterId" length="36"/>
+        <property name="response" type="java.lang.String"
+                  column="response"/>
+        <property name="pullTimestamp" type="java.util.Date"
+                  column="pull_timestamp" length="19"/>
+
+    </class>
+</hibernate-mapping>

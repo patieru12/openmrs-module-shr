@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.basicmodule.model">
+
+    <class name="SyncAuditType" table="sync_audit_type">
+
+        <id name="id" type="int" column="type_id">
+            <generator class="native"/>
+        </id>
+
+        <property name="typeName" type="java.lang.String"
+                  column="type_name" length="36"/>
+
+        <property name="description" type="java.lang.String"
+                  column="description" length="36"/>
+
+    </class>
+</hibernate-mapping>

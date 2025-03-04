@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.basicmodule.model">
+
+    <class name="ObsEncounterSync" table="obs_encounter_sync">
+
+        <id name="recordId" type="int" column="record_id">
+            <generator class="native"/>
+        </id>
+
+        <property name="patientId" type="java.lang.String"
+                  column="patient_id" length="36"/>
+
+        <property name="uuid" type="java.lang.String"
+                  column="uuid" length="36"/>
+
+        <property name="type" type="int"
+                  column="type" length="36"/>
+
+        <property name="createdDate" type="java.util.Date"
+                  column="created_date" length="19"/>
+
+        <property name="syncPushDate" type="java.util.Date"
+                  column="sync_push_date" length="19"/>
+
+        <property name="retryCount" type="int"
+                  column="retry_count" length="11"/>
+
+        <property name="isSynced" type="boolean"
+                  column="is_synced" length="11"/>
+
+        <property name="syncComment" type="java.lang.String"
+                  column="sync_comment" length="255"/>
+
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+
+
+
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <bean id="GTSLSynchronizationInterceptor" class="org.openmrs.module.basicmodule.HibernateLoggingInterceptor"
+          primary="true"/>
+    <bean parent="serviceContext">
+        <property name="moduleService">
+            <list>
+                <value>org.openmrs.module.basicmodule.impl.PrimaryCareService</value>
+                <bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+                    <property name="transactionManager">
+                        <ref bean="transactionManager"/>
+                    </property>
+                    <property name="target">
+                        <bean class="org.openmrs.module.basicmodule.impl.PrimaryCareServiceImpl">
+                            <property name="dao">
+                                <bean class="org.openmrs.module.basicmodule.db.hibernate.HibernatePrimaryCareDAO">
+                                    <property name="sessionFactory">
+                                        <ref bean="sessionFactory"/>
+                                    </property>
+                                </bean>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="preInterceptors">
+                        <list>
+                            <ref bean="authorizationInterceptor"/>
+                        </list>
+                    </property>
+                    <property name="transactionAttributeSource">
+                        <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <context:component-scan base-package="org.openmrs.module.basicmodule"/>
+
+
+    <bean class="org.openmrs.module.basicmodule.RwandaPrimaryCareContextAware"/>
+
+
+<!--    <bean id="runScheduler" class="org.openmrs.module.basicmodule.RunScheduler"/>-->
+
+    <!--<task:annotation-driven/>-->
+
+        <!-- Run every 5 seconds -->
+    <!--    <task:scheduled-tasks>
+            <task:scheduled ref="runScheduler" method="run" fixed-delay="5000" />
+&lt;!&ndash;            <task:scheduled ref="runScheduler" method="run" cron="0 0/3 * * * ?"/>&ndash;&gt;
+        </task:scheduled-tasks>
+    -->
+
+  <!--  <task:scheduled-tasks scheduler="schedulerSHR11">
+        <task:scheduled ref="runShrSchedulerSHR" method="run" cron="0 0/4 * * * *"/>
+    </task:scheduled-tasks>
+    <task:scheduler id="schedulerSHR11" pool-size="1"/>
+-->
+
+</beans>
