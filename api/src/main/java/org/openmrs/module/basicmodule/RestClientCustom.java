@@ -56,8 +56,6 @@ public class RestClientCustom {
         HttpEntity<?> request = new HttpEntity<Object>(o, headers);
         ResponseEntity<String> response = null;
         try {
-           // request1.getHeaders().add("Authorization", "Basic b3BlbmhpbWFkbWluQG1vaC5jb206T3BlbmhpbUAyMDIy");
-           // request1.getHeaders().add("Content-Type", "application/json");
             response = restTemplate.exchange(uri, HttpMethod.POST, request, String.class);
             //LOGGER.error("*************************result********************44444********+ result" + result);
             if (response.getStatusCode().value() > 199 && response.getStatusCode().value() < 400) {
